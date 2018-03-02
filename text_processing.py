@@ -2,11 +2,14 @@
     Lydia Hodges
     Text Similarity Between Contemporary Fiction Novels (1894)"""
 
-#pan_dict = {}
-#pem_dict = {}
 from math import sqrt
 
 def build_dict(filename):
+    """ Builds a dictionary for the file.
+
+        key = unique word in text
+        value = frequency of wrod in text
+    """
     di = {}
     fp = open(filename)
     for line in fp:
@@ -25,6 +28,10 @@ death_dict = build_dict('death.txt')
 list_dict = [pan_dict, pem_dict, jungle_dict, spitfire_dict, death_dict]
 
 def compare(d1,d2):
+    """ Uses cosine similarity to compare two dictionaries.
+
+        Sets are used to check for all words across both texts.
+    """
     temp = []
     keys1 = set(d1.keys())
     keys2 = set(d2.keys())
@@ -42,6 +49,8 @@ def compare(d1,d2):
     return round(final,5)
 
 def build_sim(dicts):
+    """ Uses the Compare function to compare all the dictionaries in a list to each other.
+    """
     sims = []
     for i in dicts:
         temp = []
@@ -50,5 +59,5 @@ def build_sim(dicts):
         sims.append(str(temp))
     return sims
 
-simularity = build_sim(list_dict)
-print('\n'.join(simularity))
+similarity = build_sim(list_dict)
+print('\n'.join(similarity)) # Splits the cosine similarities associated with each text on separate lines.
